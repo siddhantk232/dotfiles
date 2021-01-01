@@ -123,6 +123,7 @@ for_window [window_role="GtkFileChooserDialog"] resize set 800 600
 for_window [window_role="GtkFileChooserDialog"] move position center
 for_window [class="Spotify"] move workspace $ws10
 for_window [class="Slack"] move workspace $ws9
+for_window [class="Gcolor3"] floating enable
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
