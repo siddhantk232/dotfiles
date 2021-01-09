@@ -40,6 +40,10 @@ interval = 60
 format = "%a %d/%m %R"
 
 [[block]]
+block = "bluetooth"
+mac = "98:09:CF:CE:36:08"
+
+[[block]]
 block = "music"
 player = "spotify"
 marquee = false

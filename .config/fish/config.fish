@@ -1,7 +1,7 @@
 set fish_greeting
 
-set EDITOR nvim
-set NVM_DIR ~/.nvm
+set -x EDITOR nvim
+set -x NVM_DIR ~/.nvm
 set -x GOPATH ~/projects/go
 set -x PATH $PATH $GOPATH/bin
 set -x PATH $PATH ~/.config/scripts
