@@ -53,6 +53,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'mbbill/undotree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'mattn/emmet-vim'
 
 call plug#end()
 
