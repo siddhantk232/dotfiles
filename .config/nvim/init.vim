@@ -54,6 +54,7 @@ Plug 'mbbill/undotree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -64,6 +65,9 @@ set background=dark
 if executable('rg')
   let g:rg_derive_root='true'
 endif
+
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 let mapleader = " "
 let g:netrw_browse_split = 2
