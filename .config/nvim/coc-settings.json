@@ -13,6 +13,12 @@
   },
   "explorer.icon.enableVimDevicons": true,
   "explorer.file.showHiddenFiles": true,
-  "explorer.width": 40
+  "explorer.width": 40,
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    }
+  }
 }
-

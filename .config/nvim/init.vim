@@ -46,6 +46,7 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'jremmen/vim-ripgrep'
