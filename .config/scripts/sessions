@@ -2,9 +2,8 @@
 
 # https://github.com/awesome-streamers/awesome-streamerrc/blob/master/ThePrimeagen/tmux
 
-DAILYOS="~/projects/work/dailyos"
-ANYKIT="~/projects/work/anykit"
-ANYKITSERVER="~/projects/work/anykit-server"
+WORK="~/projects/work"
+PROJECTS="~/projects"
 
 createWindow() {
     session=$1
@@ -39,12 +38,12 @@ while [ "$#" -gt 0 ]; do
 
     case "$curr" in
     "-ank")
-        createSession anykit primary -c $ANYKIT
-        createWindow anykit monitor -c $ANYKIT 
+        createSession anykit client -c $WORK/anykit
+        createWindow anykit server -c $WORK/anykit-server 
         ;;
     "-dos")
-        createSession dailyos primary -c $DAILYOS
-        createWindow dailyos dev-server -c $DAILYOS "npm start" 
+        createSession dailyos react -c $WORK/dailyos
+        createWindow dailyos dev-server -c $WORK/dailyos "npm start" 
         ;;
     *) echo "Unavailable command... $curr"
     esac
