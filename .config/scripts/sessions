@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+# https://github.com/awesome-streamers/awesome-streamerrc/blob/master/ThePrimeagen/tmux
+
+DAILYOS="~/projects/work/dailyos"
+ANYKIT="~/projects/work/anykit"
+ANYKITSERVER="~/projects/work/anykit-server"
+
+createWindow() {
+    session=$1
+    window=$2
+    shift
+    shift
+    hasWindow=$(tmux list-windows -t $session | grep "$window")
+    if [ -z "$hasWindow" ]; then
+        cmd="tmux neww -t $session: -n $window -d"
+        if [ $# -gt 0 ]; then
+            cmd="$cmd $@"
+        fi
+        echo "Creating Window(\"$hasWindow\"): $cmd"
+        eval $cmd
+    fi
+}
+
+createSession() {
+    session=$1
+    window=$2
+    shift
+    shift
+    cmd="tmux new -s $session -d -n $window $@ > /dev/null 2>&1"
+
+    echo "Creating Session: $cmd"
+    eval $cmd
+}
+
+while [ "$#" -gt 0 ]; do
+    curr=$1
+    shift
+
+    case "$curr" in
+    "-ank")
+        createSession anykit primary -c $ANYKIT
+        createWindow anykit monitor -c $ANYKIT 
+        ;;
+    "-dos")
+        createSession dailyos primary -c $DAILYOS
+        createWindow dailyos dev-server -c $DAILYOS "npm start" 
+        ;;
+    *) echo "Unavailable command... $curr"
+    esac
+done
