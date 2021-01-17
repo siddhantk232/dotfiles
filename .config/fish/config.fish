@@ -13,7 +13,9 @@ alias calacritty "nvim ~/.config/alacritty/alacritty.yml"
 alias ci3status "nvim ~/.config/i3/status.toml"
 alias cvim "nvim ~/.config/nvim/init.vim"
 alias ctmux "nvim ~/.tmux.conf"
+
 alias config "/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias todo "nvim ~/todo"
+alias e "nvim"
 
 fish_vi_key_bindings
