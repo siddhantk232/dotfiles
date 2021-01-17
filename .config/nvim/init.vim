@@ -61,6 +61,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim'
 Plug 'vimwiki/vimwiki'
 Plug 'ryanoasis/vim-devicons'
+Plug 'dag/vim-fish'
 
 call plug#end()
 
