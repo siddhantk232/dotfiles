@@ -4,6 +4,8 @@ set fish_greeting
 # environment variables 
 
 set -x EDITOR nvim
+set -x TERM alacritty
+set -x LC_ALL en_US.UTF-8
 set -x NVM_DIR ~/.nvm
 set -x GOPATH ~/projects/go
 set -x PATH $PATH $GOPATH/bin
@@ -25,10 +27,11 @@ alias todo "nvim ~/todo"
 alias e "nvim"
 
 # change caps lock key to escape 
-setxkbmap -option ctrl:nocaps
+# setxkbmap -option ctrl:nocaps
 
 # set caps lock as ctrl when pressed with other keys
-xcape -e 'Control_L=Escape'
+# xcape -e 'Control_L=Escape'
 
 # enable vi
 fish_vi_key_bindings
+
