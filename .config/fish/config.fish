@@ -19,6 +19,7 @@ alias calacritty "nvim ~/.config/alacritty/alacritty.yml"
 alias ci3status "nvim ~/.config/i3/status.toml"
 alias cvim "nvim ~/.config/nvim/init.vim"
 alias ctmux "nvim ~/.tmux.conf"
+alias csessions "nvim ~/.config/scripts/sessions"
 
 # aliases for commands
 

@@ -62,6 +62,7 @@ Plug 'mattn/emmet-vim'
 Plug 'vimwiki/vimwiki'
 Plug 'ryanoasis/vim-devicons'
 Plug 'dag/vim-fish'
+Plug 'godlygeek/tabular'
 
 call plug#end()
 
