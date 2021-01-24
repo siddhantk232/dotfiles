@@ -63,6 +63,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'ryanoasis/vim-devicons'
 Plug 'dag/vim-fish'
 Plug 'godlygeek/tabular'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
