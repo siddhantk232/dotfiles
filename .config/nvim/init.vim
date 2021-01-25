@@ -16,6 +16,8 @@ set undodir=~/.vim/undodir
 set incsearch
 set hidden
 set nohlsearch
+set scrolloff=8
+set signcolumn=yes
 
 " https://github.com/morhetz/gruvbox/wiki/Terminal-specific#0-recommended-neovimvim-true-color-support
 set termguicolors
@@ -29,16 +31,6 @@ set updatetime=50
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
-
 
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
