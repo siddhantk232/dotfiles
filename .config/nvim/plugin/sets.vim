@@ -37,26 +37,3 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 colorscheme gruvbox
 set background=dark
-
-" respect .gitignore and always search from root
-if executable('rg')
-  let g:rg_derive_root='true'
-endif
-
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
-
-let mapleader                 = " "
-let g:netrw_browse_split      = 2
-let g:netrw_banner            = 0
-let g:netrw_winsize           = 25
-let g:netrw_localrmdir        = 'rm -r'
-let g:airline_powerline_fonts = 1
-let g:javascript_plugin_jsdoc = 1
-
-let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
-let $FZF_DEFAULT_OPTS='--reverse'
-
-" use peitalin/vim-jsx-typescript for typescriptreact
-let g:vim_jsx_pretty_disable_tsx = 1
-
