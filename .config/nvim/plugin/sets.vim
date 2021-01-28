@@ -33,7 +33,4 @@ set updatetime=50
 set shortmess+=c
 
 set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
 
-colorscheme gruvbox
-set background=dark
