@@ -36,6 +36,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'gruvbox-community/gruvbox'
 Plug 'vim-airline/vim-airline'
 
+"experiments (!permanent)
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+
 call plug#end()
 
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
@@ -59,6 +62,8 @@ let g:javascript_plugin_jsdoc = 1
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
 
+let g:chadtree_settings = { 'view': { 'open_direction': 'right' } }
+
 " use peitalin/vim-jsx-typescript for typescriptreact
 let g:vim_jsx_pretty_disable_tsx = 1
 
@@ -71,7 +76,8 @@ nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>e :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+" nnoremap <leader>e :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <leader>e <cmd>CHADopen<cr>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
@@ -87,7 +93,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
-nmap <space>e :CocCommand explorer --position right<CR>
+" nmap <space>e :CocCommand explorer --position right<CR>
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
