@@ -6,6 +6,11 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 
+" Syntax additions
+Plug 'pangloss/vim-javascript'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'maxmellon/vim-jsx-pretty'
+
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
@@ -69,6 +74,13 @@ nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 nnoremap <Leader>rp :resize 100<CR>
 nnoremap <C-p> :GFiles<CR>
+
+" https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim#highlighting-for-large-files
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+
+" set filetypes as typescriptreact for syntax highlight
+autocmd BufNewFile,BufRead *.tsx set filetype=typescriptreact
 
 " Use completion-nvim in every buffer
 autocmd BufEnter * lua require'completion'.on_attach()
