@@ -1,5 +1,6 @@
 syntax on
 
+set exrc
 set noerrorbells
 set tabstop=2 softtabstop=2
 set shiftwidth=2
@@ -13,11 +14,13 @@ set noswapfile
 set nobackup
 set nowritebackup
 set undodir=~/.vim/undodir
+set undofile
 set incsearch
 set hidden
 set nohlsearch
 set scrolloff=8
 set signcolumn=yes
+set completeopt=menuone,noinsert,noselect
 
 " https://github.com/morhetz/gruvbox/wiki/Terminal-specific#0-recommended-neovimvim-true-color-support
 set termguicolors
