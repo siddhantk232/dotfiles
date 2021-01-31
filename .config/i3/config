@@ -2,6 +2,7 @@
 set $mod Mod4
 set $inner_gaps 10
 set $outer_gaps 5
+set $BROWSER brave
 
 font pango: Ubuntu Mono 10
 
@@ -178,6 +179,9 @@ bindsym XF86TouchpadToggle exec tpoff
 bindsym $mod+space exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
+# launch stuff quickly
+bindsym Control+b exec $BROWSER
 
 bar {
     font pango: Ubuntu Mono 11
