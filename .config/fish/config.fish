@@ -10,6 +10,7 @@ set -x NVM_DIR ~/.nvm
 set -x GOPATH ~/projects/go
 set -x PATH $PATH $GOPATH/bin
 set -x PATH $PATH ~/.config/scripts
+set -x BAT_THEME gruvbox
 
 # config aliases (all lowercase and starts with c)
 
