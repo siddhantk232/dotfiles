@@ -39,6 +39,11 @@ Plug 'vim-airline/vim-airline'
 "experiments (!temporary)
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
+" prettier
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install', }
+
+
 call plug#end()
 
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
@@ -78,6 +83,7 @@ nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 nnoremap <Leader>rp :resize 100<CR>
+nmap <Leader>p :PrettierAsync<CR>
 
 " https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim#highlighting-for-large-files
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
