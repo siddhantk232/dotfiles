@@ -45,6 +45,10 @@ while [ "$#" -gt 0 ]; do
         createSession dailyos react -c $WORK/dailyos
         createWindow dailyos dev-server -c $WORK/dailyos "npm start" 
         ;;
+    "-papi")
+        createSession products-api eee -c $PROJECTS/products-api
+        createWindow products-api term -c $PROJECTS/products-api
+        ;;
     *) echo "Unavailable command... $curr"
     esac
 done
