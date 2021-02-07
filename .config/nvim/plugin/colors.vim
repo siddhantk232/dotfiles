@@ -16,3 +16,5 @@ fun! SetColors()
 endfun
 
 call SetColors()
+
+nnoremap <leader>col :call SetColors()<CR>
