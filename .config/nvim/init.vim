@@ -30,6 +30,7 @@ Plug 'tpope/vim-fugitive'
 " fancy stuff
 Plug 'gruvbox-community/gruvbox'
 Plug 'vim-airline/vim-airline'
+Plug 'mboughaba/i3config.vim'
 
 "experiments (!temporary)
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
@@ -93,3 +94,8 @@ autocmd BufNewFile,BufRead *.tsx set filetype=typescriptreact
 
 " Use completion-nvim in every buffer
 autocmd BufEnter * lua require'completion'.on_attach()
+
+aug i3config_ft_detection
+  au!
+  au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
+aug end
