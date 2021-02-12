@@ -180,8 +180,9 @@ bindsym $mod+space exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-# launch stuff quickly
+# launch stuff quickly aka app shortcuts
 bindsym Control+b exec $BROWSER
+bindsym Control+Shift+e exec rofi -show emoji -modi emoji
 
 bar {
     font pango: Ubuntu Mono 11
