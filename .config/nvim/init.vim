@@ -29,6 +29,7 @@ Plug 'tpope/vim-fugitive'
 
 " fancy stuff
 Plug 'gruvbox-community/gruvbox'
+Plug 'ayu-theme/ayu-vim' 
 Plug 'vim-airline/vim-airline'
 Plug 'mboughaba/i3config.vim'
 

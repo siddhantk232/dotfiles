@@ -27,8 +27,9 @@ alias csessions "nvim ~/.config/scripts/sessions"
 alias config "/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias todo "nvim ~/todo"
 alias e "nvim"
-
 alias ls "lsd"
+
+alias cwd "cd ~/projects/work"
 
 # enable vi
 fish_vi_key_bindings
