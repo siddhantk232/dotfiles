@@ -201,4 +201,5 @@ bar {
 }
 
 exec nitrogen --restore
+exec wal -R
 exec picom --experimental-backends --backend glx --xrender-sync-fence
