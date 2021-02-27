@@ -5,6 +5,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
+Plug 'anott03/nvim-lspinstall'
 
 " telescope
 Plug 'nvim-lua/popup.nvim'
