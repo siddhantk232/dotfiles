@@ -16,9 +16,7 @@ set -x BAT_THEME gruvbox
 
 alias cfish        "nvim ~/.config/fish/config.fish"
 alias ci3          "nvim ~/.config/i3/config"
-alias calacritty   "nvim ~/.config/alacritty/alacritty.yml"
 alias ci3status    "nvim ~/.config/i3/status.toml"
-alias cvim         "cd ~/.config/nvim && e"
 alias ctmux        "nvim ~/.tmux.conf"
 alias csessions    "nvim ~/.config/scripts/sessions"
 alias cth          "wal -i ~/Pictures/Wallpapers"
@@ -28,7 +26,6 @@ alias cth          "wal -i ~/Pictures/Wallpapers"
 alias config       "/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias todo         "nvim ~/todo"
 alias e            "nvim"
-alias ls           "lsd"
 alias cwd          "cd ~/projects/work"
 
 # enable vi
