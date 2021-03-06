@@ -36,6 +36,13 @@ M.search_dotfiles = function()
     })
 end
 
+M.search_wordpress_themes = function() 
+    require("telescope.builtin").find_files({
+        prompt_title = "< Themes >",
+        cwd = "$WORDPRESS_THEME_FOLDER"
+    })
+end
+
 
 M.git_branches = function() 
     require("telescope.builtin").git_branches({

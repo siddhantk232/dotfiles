@@ -11,6 +11,7 @@ set -x GOPATH ~/projects/go
 set -x PATH $PATH $GOPATH/bin
 set -x PATH $PATH ~/.config/scripts
 set -x BAT_THEME gruvbox
+set -x WORDPRESS_THEME_FOLDER ~/projects/playground/wordpress/fictional-university/wordpress/wp-content/themes/
 
 # config aliases (all lowercase and starts with c)
 
@@ -26,6 +27,7 @@ alias cth          "wal -i ~/Pictures/Wallpapers"
 alias config       "/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias todo         "nvim ~/todo"
 alias e            "nvim"
+alias ls           "lsd"
 alias cwd          "cd ~/projects/work"
 
 # enable vi

@@ -7,4 +7,5 @@ nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
 
 nnoremap <leader>vrc :lua require('siddhant.telescope').search_dotfiles()<CR>
+nnoremap <leader>wts :lua require('siddhant.telescope').search_wordpress_themes()<CR>
 nnoremap <leader>gc :lua require('siddhant.telescope').git_branches()<CR>

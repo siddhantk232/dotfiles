@@ -2,10 +2,9 @@ call plug#begin('~/.vim/plugged')
 
 " Neovim lsp Plugins
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
-Plug 'anott03/nvim-lspinstall'
+Plug 'nvim-lua/completion-nvim'
 
 " telescope
 Plug 'nvim-lua/popup.nvim'
@@ -96,7 +95,7 @@ autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 autocmd BufNewFile,BufRead *.tsx set filetype=typescriptreact
 
 " Use completion-nvim in every buffer
-autocmd BufEnter * lua require'completion'.on_attach()
+" autocmd BufEnter * lua require'completion'.on_attach()
 
 aug i3config_ft_detection
   au!

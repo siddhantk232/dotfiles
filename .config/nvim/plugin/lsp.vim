@@ -10,15 +10,24 @@ nnoremap <leader>k :lua vim.lsp.buf.hover()<CR>
 
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
-lua require'lspconfig'.tsserver.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.gopls.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.clangd.setup{ on_attach=require'completion'.on_attach }
+lua << EOF
+local on_attach = require'completion'.on_attach 
+local root_pattern = require'lspconfig'.util.root_pattern
 
-lua require'lspconfig'.bashls.setup{ on_attach=require'completion'.on_attach }
+require'lspconfig'.tsserver.setup{ on_attach=on_attach }
+require'lspconfig'.gopls.setup{ on_attach=on_attach }
 
-lua require'lspconfig'.cssls.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.graphql.setup{ on_attach=require'completion'.on_attach }
-lua require'lspconfig'.html.setup{ on_attach=require'completion'.on_attach }
+require'lspconfig'.clangd.setup {
+    on_attach = on_attach, 
+    root_dir = function() return vim.loop.cwd() end 
+}
 
-lua require'lspconfig'.intelephense.setup{ on_attach=require'completion'.on_attach }
+require'lspconfig'.bashls.setup{ on_attach=on_attach }
 
+require'lspconfig'.cssls.setup{ on_attach=on_attach }
+require'lspconfig'.graphql.setup{ on_attach=on_attach }
+require'lspconfig'.html.setup{ on_attach=on_attach }
+
+require'lspconfig'.intelephense.setup{ on_attach = on_attach }
+
+EOF
