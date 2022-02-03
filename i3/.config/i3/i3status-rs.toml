@@ -1,5 +1,5 @@
 theme = "gruvbox-dark"
-icons = "awesome"
+icons = "none"
 
 [[block]]
 block = "disk_space"
@@ -10,7 +10,7 @@ unit = "GB"
 interval = 20
 warning = 20.0
 alert = 10.0
-format = "{icon} {used}"
+format = "PORN {used}"
 
 [[block]]
 block = "memory"
@@ -45,6 +45,6 @@ format = "%a %d/%m %R"
 
 [[block]]
 block = "battery"
-format = "{percentage}% {time}"
-interval = 10
+format = "{percentage}%"
+interval = 30
 
