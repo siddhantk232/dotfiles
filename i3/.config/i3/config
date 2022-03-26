@@ -181,7 +181,7 @@ bindsym Control+Shift+e exec rofi -show emoji -modi emoji
 
 # lock screen https://github.com/pavanjadhaw/betterlockscreen
 # I almost never use lockscreens
-# bindsym Control+Shift+l exec betterlockscreen -l
+bindsym Control+Shift+l exec betterlockscreen -l
 
 # scratchpad
 for_window [instance="dropdown"] move scratchpad
@@ -215,6 +215,7 @@ bar {
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom --experimental-backends --backend glx --xrender-sync-fence
 exec --no-startup-id nm-applet
+exec --no-startup-id goldendict
 exec --no-startup-id blueman-applet
 
 exec --no-startup-id setxkbmap -option compose:ralt
