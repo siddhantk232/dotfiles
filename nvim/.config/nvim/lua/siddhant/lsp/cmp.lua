@@ -17,6 +17,10 @@ cmp.setup({
     end
   },
 
+  view = {
+    entries = 'native'
+  },
+
   mapping = {
     ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
@@ -42,11 +46,14 @@ cmp.setup({
     end, {"i", "s"})
   },
 
-  sources = cmp.config.sources({
-    {name = 'nvim_lsp'}, {name = 'luasnip'}, -- For luasnip users.
-    {name = 'nvim_lua'}, {name = 'rg'}, {name = 'calc'}, {name = 'spell'},
-    {name = 'npm', keyword_length = 3}
-  }, {{name = 'buffer'}})
+  sources = cmp.config.sources(
+    {{name = 'buffer'}},
+    {
+      {name = 'nvim_lsp'}, {name = 'luasnip'}, -- For luasnip users.
+      {name = 'nvim_lua'}, {name = 'rg'}, {name = 'calc'}, {name = 'spell'},
+      {name = 'npm', keyword_length = 3}
+    }
+  )
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
