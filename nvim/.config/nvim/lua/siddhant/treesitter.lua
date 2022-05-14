@@ -12,7 +12,7 @@ require("nvim-treesitter.configs").setup {
     },
   },
   indent = {
-    enable = false,
+    enable = true,
   },
   autotag = {
     enable = true,
@@ -26,5 +26,8 @@ require("nvim-treesitter.configs").setup {
       "svelte",
       "vue",
     },
+  },
+  context_commentstring = {
+    enable = true,
   },
 }
