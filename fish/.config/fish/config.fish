@@ -8,6 +8,7 @@ set -x TERM st
 set -x LC_ALL en_US.UTF-8
 set -x BAT_THEME gruvbox-dark
 set -x PATH $PATH ~/bin
+set -x PATH $PATH /opt/Postman/app/Postman
 set -x PATH $PATH ~/.asdf/installs/golang/1.17.6/packages/bin
 
 # config aliases (all lowercase and starts with c)
