@@ -42,6 +42,7 @@ Plug 'tpope/vim-surround'
 
 " fancy stuff
 Plug 'gruvbox-community/gruvbox'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'ayu-theme/ayu-vim' 
 Plug 'hoob3rt/lualine.nvim'
 Plug 'mboughaba/i3config.vim'
