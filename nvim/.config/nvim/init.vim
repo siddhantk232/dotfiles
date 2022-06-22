@@ -5,9 +5,11 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'onsails/lspkind.nvim'
 Plug 'creativenull/diagnosticls-configs-nvim'
 
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'

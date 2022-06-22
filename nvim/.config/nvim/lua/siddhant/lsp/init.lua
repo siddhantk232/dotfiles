@@ -5,6 +5,7 @@ local nvim_lsp = require "lspconfig"
 
 -- setup compe
 require "siddhant.lsp.cmp"
+require "siddhant.lsp.tabnine"
 
 require "siddhant.lsp.diagnosticls"
 
