@@ -54,6 +54,7 @@ Plug 'mhinz/vim-startify'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'folke/todo-comments.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'lukas-reineke/headlines.nvim'
 
 " fmt
 Plug 'sbdchd/neoformat'
