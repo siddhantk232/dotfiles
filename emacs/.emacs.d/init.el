@@ -8,12 +8,14 @@
 
 (set-face-attribute 'default nil :font "Fira Code" :height 130)
 
-(load-theme 'wombat)
 ;; transparency
 (set-frame-parameter (selected-frame) 'alpha '(96 96))
 
 ;; Make <esc> quit prompts!
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+(column-number-mode)
+(global-display-line-numbers-mode t)
 
 ;; Initialize package sources
 (require 'package)
@@ -36,6 +38,23 @@
 
 (use-package command-log-mode)
 
+(use-package doom-themes
+  :init (load-theme 'doom-gruvbox t))
+
+;; NOTE: The first time you load your configuration on a new machine, you'll
+;; need to run the following command interactively so that mode line icons
+;; display correctly:
+;;
+;; M-x all-the-icons-install-fonts
+(use-package all-the-icons)
+
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+         ("C-x b" . counsel-ibuffer)
+         ("C-x C-f" . counsel-find-file)
+         :map minibuffer-local-map
+         ("C-r" . 'counsel-minibuffer-history)))
+
 (use-package ivy
   :diminish
   :bind (("C-s" . swiper)
@@ -53,11 +72,23 @@
          ("C-d" . ivy-reverse-i-search-kill))
   :config)
 
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1))
+
 (ivy-mode 1)
 
 (use-package doom-modeline
-  :ensure t
   :init (doom-modeline-mode 1))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package which-key
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0.3))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
