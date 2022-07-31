@@ -9,6 +9,8 @@
 (set-face-attribute 'default nil :font "Fira Code" :height 130)
 
 (load-theme 'wombat)
+;; transparency
+(set-frame-parameter (selected-frame) 'alpha '(96 96))
 
 ;; Make <esc> quit prompts!
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
