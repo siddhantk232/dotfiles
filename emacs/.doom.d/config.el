@@ -16,12 +16,16 @@
 
 (setq org-directory "~/vimwiki/")
 
+(setq treemacs-position 'right)
+
 ;; projectile project search path
 (setq projectile-project-search-path '(("~/projects/" . 3)))
 
 ;; C-c for NORMAL
 (define-key evil-insert-state-map (kbd "C-c") 'evil-normal-state)
+
 (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+(define-key evil-normal-state-map (kbd "SPC e") 'treemacs)
 
 (add-to-list 'auto-mode-alist '("\\.MD\\'" . markdown-mode))
 
