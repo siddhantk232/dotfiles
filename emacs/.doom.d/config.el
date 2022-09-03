@@ -29,6 +29,8 @@
 
 (add-to-list 'auto-mode-alist '("\\.MD\\'" . markdown-mode))
 
+(display-fill-column-indicator-mode 1)
+
 (use-package! org-roam
   :ensure t
   :custom
