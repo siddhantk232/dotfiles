@@ -37,3 +37,7 @@
   (org-roam-directory "~/vimwiki/roam")
   :config
   (org-roam-setup))
+
+(setq org-log-done 'time)
+
+(setq org-agenda-files (directory-files-recursively "~/vimwiki/" "\\.org$"))
