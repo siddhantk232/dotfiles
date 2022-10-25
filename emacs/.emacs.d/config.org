@@ -1,0 +1,241 @@
+* TODO Introduction
+1. Keymaps are defined in their related groups (ex: buffer switching keymaps in completion
+   
+   #+begin_src emacs-lisp
+     (setq user-full-name "Siddhant Kumar"
+           user-mail-address "siddhantk232@gmail.com")
+   #+end_src
+* UI/UX
+#+begin_src emacs-lisp
+  (menu-bar-mode 0)
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0)
+  (global-hl-line-mode t)
+
+  (use-package gruvbox-theme
+    :ensure t
+    :init (load-theme 'gruvbox-dark-hard t))
+
+  (setq inhibit-startup-message t)
+  (setq scroll-conservatively 100)
+  (setq ring-bell-function 'ignore)
+  (setq make-backup-file nil
+      auto-save-default nil)
+  ;; yes or y | no or n
+  (defalias 'yes-or-no-p 'y-or-n-p)
+
+  (setq display-line-numbers-type 'relative)
+  (global-display-line-numbers-mode)
+
+  (use-package which-key
+    :ensure t
+    :init
+    (which-key-mode t))
+
+  (display-fill-column-indicator-mode 1)
+
+  ;; Transparency
+  (set-frame-parameter (selected-frame) 'alpha '(97 97))
+#+end_src
+* Vim binds
+#+begin_src emacs-lisp
+  (use-package evil
+    :ensure t
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    (setq evil-want-C-u-scroll t)
+    (setq evil-want-C-i-jump nil)
+    :config
+    (evil-mode 1)
+    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+    (define-key evil-insert-state-map (kbd "C-c") 'evil-normal-state)
+
+    ;; Use visual line motions even outside of visual-line-mode buffers
+    (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+    (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+    (evil-set-initial-state 'messages-buffer-mode 'normal)
+    (evil-set-initial-state 'dashboard-mode 'normal))
+
+  (use-package evil-commentary
+    :after evil
+    :config
+    (evil-commentary-mode 1))
+
+  (use-package evil-numbers
+    :after evil
+    :config
+    (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt))
+
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init))
+#+end_src
+* Org Mode
+
+#+begin_src emacs-lisp
+  (defun sc/org-mode-setup ()
+    (org-indent-mode)
+    (variable-pitch-mode 1)
+    (auto-fill-mode 0)
+    (visual-line-mode 1)
+    (setq evil-auto-indent nil))
+
+  (use-package org
+    :hook (org-mode . sc/org-mode-setup)
+    :config
+    (require 'org-tempo)
+    (setq org-ellipsis " ▾"
+          org-hide-emphasis-markers t
+          org-directory "~/vimwiki/"
+          org-log-done 'time
+          org-confirm-babel-evaluate nil
+          org-agenda-files (directory-files-recursively "~/vimwiki/" "\\.org$")))
+
+  (use-package org-contrib
+    :ensure t
+    :after org)
+
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages '((C . t)
+                               (js . t)
+                               (ruby . t)
+                               (python .t)
+                               (clojure . t)))
+
+  (use-package org-appear
+    :ensure t
+    :after org)
+
+  (use-package org-superstar
+    :ensure t
+    :after org
+    :init
+    :hook (org-mode . org-superstar-mode))
+
+  (use-package org-fancy-priorities
+    :ensure t
+    :after org
+    :hook
+    (org-mode . org-fancy-priorities-mode)
+    :config
+    (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
+
+  (use-package evil-org
+    :ensure t
+    :after org
+    :hook (org-mode . (lambda () evil-org-mode))
+    :config
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys))
+
+  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+#+end_src
+
+* Completion
+
+Minibuffer completion powered by [[https://github.com/abo-abo/swiper#ivy][Ivy]] and friends.
+
+#+begin_src emacs-lisp
+  (use-package ivy
+    :ensure t
+    :config
+    (ivy-mode 1))
+
+  (use-package ivy-rich
+    :ensure t
+    :init
+    (ivy-rich-mode 1))
+
+  (use-package amx
+    :ensure t
+    :after ivy
+    :custom
+    (amx-backend 'auto)
+    (amx-save-file "~/.emacs.d/amx-items")
+    (amx-history-length 50)
+    (amx-show-key-bindings nil)
+    :config
+    (amx-mode 1))
+
+  (use-package counsel
+    :ensure t
+    :after (ivy amx)
+    :config
+    ;; Remove commands that only work with key bindings
+    (put 'counsel-find-symbol 'no-counsel-M-x t)
+    :bind (("M-X" . counsel-M-x)
+           ("C-x C-f" . counsel-find-file)
+           ("C-x d" . counsel-dired)
+           ("C-h v" . counsel-describe-variable)
+           ("C-h f" . counsel-describe-function)))
+#+end_src
+
+Buffer associated keymaps
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-x C-b") 'ivy-switch-buffer)
+  (global-set-key (kbd "C-x b") 'ibuffer)
+#+end_src
+
+* Project features
+
+Projectile, treemacs and, magit
+
+#+begin_src emacs-lisp
+  (use-package projectile
+    :ensure t
+    :custom
+    (projectile-switch-project-action 'projectile-dired)
+    (projectile-keymap-prefix (kbd "C-c p"))
+    (projectile-enable-caching t)
+    (projectile-completion-system 'ivy)
+    :config
+    (projectile-mode 1))
+
+
+  ;; projectile project search path
+  (setq projectile-project-search-path '(("~/projects/" . 3)))
+  (define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+
+  (use-package counsel-projectile
+    :disabled t
+    :after projectile
+    :config (counsel-projectile-mode))
+
+  (use-package treemacs
+    :ensure t
+    :custom
+    (treemacs-position 'right))
+
+  (define-key evil-normal-state-map (kbd "SPC e") 'treemacs)
+
+  (use-package magit
+    :ensure t)
+  (global-set-key (kbd "C-x g") 'magit-status)
+#+end_src
+
+* Startup time
+
+#+begin_src emacs-lisp
+;; The default is 800 kilobytes.  Measured in bytes.
+(setq gc-cons-threshold (* 50 1000 1000))
+
+(defun sc/display-startup-time ()
+  (message "Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                   (float-time
+                     (time-subtract after-init-time before-init-time)))
+           gcs-done))
+
+(add-hook 'emacs-startup-hook #'sc/display-startup-time)
+#+end_src
