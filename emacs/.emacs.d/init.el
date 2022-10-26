@@ -20,7 +20,7 @@
  '(custom-safe-themes
    '("d80952c58cf1b06d936b1392c38230b74ae1a2a6729594770762dc0779ac66b7" default))
  '(package-selected-packages
-   '(magit treemacs projectile ivy-rich counsel amx ivy evil-collection evil-numbers evil-commentary evil gruvbox-theme which-key use-package)))
+   '(lsp-treemacs lsp-ivy lsp-ui lsp-mode company magit treemacs projectile ivy-rich counsel amx ivy evil-collection evil-numbers evil-commentary evil gruvbox-theme which-key use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

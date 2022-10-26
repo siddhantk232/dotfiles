@@ -5,6 +5,10 @@
      (setq user-full-name "Siddhant Kumar"
            user-mail-address "siddhantk232@gmail.com")
    #+end_src
+* General
+#+begin_src emacs-lisp
+(setq native-comp-async-report-warnings-errors nil)
+#+end_src
 * UI/UX
 #+begin_src emacs-lisp
   (menu-bar-mode 0)
@@ -187,6 +191,45 @@ Buffer associated keymaps
   (global-set-key (kbd "C-x b") 'ibuffer)
 #+end_src
 
+* LSP
+#+begin_src emacs-lisp
+  (setq lsp-use-plists t)
+  (use-package lsp-mode
+    :init
+    (setq lsp-keymap-prefix "C-c l")
+    :hook ((lsp-mode . lsp-enable-which-key-integration))
+    :commands (lsp lsp-deferred))
+
+  (use-package lsp-ui :commands lsp-ui-mode)
+  (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+  (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
+  (use-package company
+    :after lsp-mode
+    :hook (lsp-mode . company-mode)
+    :bind (:map company-active-map
+           ("<tab>" . company-complete-selection))
+          (:map lsp-mode-map
+           ("<tab>" . company-indent-or-complete-common))
+    :custom
+    (company-minimum-prefix-length 1)
+    (company-idle-delay 0.0))
+
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
+#+end_src
+* Treesitter
+#+begin_src emacs-lisp
+  (use-package tree-sitter
+    :ensure t
+    :config
+     (global-tree-sitter-mode)
+     (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+  (use-package tree-sitter-langs
+    :after (tree-sitter)
+    :ensure t)
+#+end_src
 * Project features
 
 Projectile, treemacs and, magit
@@ -218,17 +261,81 @@ Projectile, treemacs and, magit
     (treemacs-position 'right))
 
   (define-key evil-normal-state-map (kbd "SPC e") 'treemacs)
-
+  
   (use-package magit
     :ensure t)
   (global-set-key (kbd "C-x g") 'magit-status)
 #+end_src
 
+** Web
+#+begin_src emacs-lisp
+  (use-package counsel-css
+    :ensure t)
+
+  (use-package emmet-mode
+    :ensure t)
+
+  (use-package rainbow-mode
+    :ensure t)
+
+  (use-package rjsx-mode
+    :ensure t
+    :mode "\\.js\\'")
+
+  (use-package prettier-js
+    :ensure t
+    :after (rjsx-mode)
+    :hook ((rjsx-mode . prettier-js-mode)))
+
+  (use-package typescript-mode
+    :mode "\\.ts\\'"
+    :hook (typescript-mode . lsp-deferred)
+    :config
+    (setq typescript-indent-level 2))
+
+  (use-package web-mode
+    :ensure t
+    :after emmet-mode
+    :hook
+    ((web-mode . emmet-mode)
+     (web-mode . lsp-deferred)
+     (web-mode . rainbow-mode))
+    :config
+    (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+    ;; If the user has installed `vue-mode' then, by appending this to
+    ;; `auto-mode-alist' rather than prepending it, its autoload will have
+    ;; priority over this one.
+    (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode) 'append)
+    (defun my-web-mode-hook ()
+      "Hooks for Web mode."
+      (setq web-mode-code-indent-offset 4
+            web-mode-css-indent-offset 2
+            web-mode-markup-indent-offset 2))
+    (add-hook 'web-mode-hook  'my-web-mode-hook))
+#+end_src
+
+** Python
+
+** Go
+
+** Haskell
+
+
 * Startup time
 
 #+begin_src emacs-lisp
 ;; The default is 800 kilobytes.  Measured in bytes.
-(setq gc-cons-threshold (* 50 1000 1000))
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
 
 (defun sc/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
