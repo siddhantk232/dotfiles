@@ -273,14 +273,17 @@ Projectile, treemacs and, magit
     :ensure t)
 
   (use-package emmet-mode
-    :ensure t)
+    :ensure t
+    :hook (web-mode rjsx-mode))
 
   (use-package rainbow-mode
     :ensure t)
 
   (use-package rjsx-mode
     :ensure t
-    :mode "\\.js\\'")
+    :mode
+    (("\\.jsx\\'"  . rjsx-mode)
+     ("\\.tsx\\'" . rjsx-mode)))
 
   (use-package prettier-js
     :ensure t
@@ -295,10 +298,8 @@ Projectile, treemacs and, magit
 
   (use-package web-mode
     :ensure t
-    :after emmet-mode
     :hook
-    ((web-mode . emmet-mode)
-     (web-mode . lsp-deferred)
+    ((web-mode . lsp-deferred)
      (web-mode . rainbow-mode))
     :config
     (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -328,7 +329,6 @@ Projectile, treemacs and, magit
 ** Go
 
 ** Haskell
-
 
 * Startup time
 
