@@ -12,11 +12,11 @@ require "siddhant.lsp.diagnosticls"
 local servers = {
   tsserver = {},
   gopls = {},
-  clangd = {
-    root_dir = function()
-      return vim.loop.cwd()
-    end,
-  },
+  -- clangd = {
+  --   root_dir = function()
+  --     return vim.loop.cwd()
+  --   end,
+  -- },
   hls = {},
   dartls = {},
   solargraph = {},
@@ -45,3 +45,4 @@ for name, opts in pairs(servers) do
     }, opts))
   end
 end
+

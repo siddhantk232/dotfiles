@@ -6,8 +6,14 @@
            user-mail-address "siddhantk232@gmail.com")
    #+end_src
 * General
+** Supress annoying warnings.
 #+begin_src emacs-lisp
-(setq native-comp-async-report-warnings-errors nil)
+  (setq native-comp-async-report-warnings-errors nil)
+#+end_src
+** show lines and columns
+#+begin_src emacs-lisp
+  (line-number-mode 1)
+  (column-number-mode 1)
 #+end_src
 * UI/UX
 #+begin_src emacs-lisp
@@ -17,13 +23,12 @@
   (global-hl-line-mode t)
 
   (use-package gruvbox-theme
-    :ensure t
-    :init (load-theme 'gruvbox-dark-hard t))
+    :ensure t)
 
   (setq inhibit-startup-message t)
   (setq scroll-conservatively 100)
   (setq ring-bell-function 'ignore)
-  (setq make-backup-file nil
+  (setq make-backup-files nil
       auto-save-default nil)
   ;; yes or y | no or n
   (defalias 'yes-or-no-p 'y-or-n-p)
@@ -40,6 +45,12 @@
 
   ;; Transparency
   (set-frame-parameter (selected-frame) 'alpha '(97 97))
+
+  (require 'ansi-color)
+  (defun sc/ansi-colorize-buffer ()
+    (let ((buffer-read-only nil))
+      (ansi-color-apply-on-region (point-min) (point-max))))
+  (add-hook 'compilation-filter-hook 'sc/ansi-colorize-buffer)
 #+end_src
 * Vim binds
 #+begin_src emacs-lisp
@@ -78,8 +89,49 @@
     (evil-collection-init))
 #+end_src
 * Org Mode
-
+** Basic config
+*** Open src window in current window.
 #+begin_src emacs-lisp
+  (setq org-src-window-setup 'current-window)
+#+end_src
+
+*** open html exports in browser
+#+begin_src emacs-lisp
+  (setq org-file-apps
+      (quote (("\\.x?html?\\'" . browse-url))))
+#+end_src
+** Packages
+#+begin_src emacs-lisp
+  (defun sc/org-font-setup ()
+    ;; Replace list hyphen with dot
+    (font-lock-add-keywords 'org-mode
+                            '(("^ *\\([-]\\) "
+                               (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+    ;; Set faces for heading levels
+    (dolist (face '((org-level-1 . 1.2)
+                    (org-level-2 . 1.1)
+                    (org-level-3 . 1.05)
+                    (org-level-4 . 1.0)
+                    (org-level-5 . 1.1)
+                    (org-level-6 . 1.1)
+                    (org-level-7 . 1.1)
+                    (org-level-8 . 1.1)))
+      (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
+
+    ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+    (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
+    (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
+    (set-face-attribute 'org-code nil     :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-table nil    :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
+    (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
+    (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
+
   (defun sc/org-mode-setup ()
     (org-indent-mode)
     (variable-pitch-mode 1)
@@ -96,7 +148,8 @@
           org-directory "~/vimwiki/"
           org-log-done 'time
           org-confirm-babel-evaluate nil
-          org-agenda-files (directory-files-recursively "~/vimwiki/" "\\.org$")))
+          org-agenda-files (directory-files-recursively "~/vimwiki/" "\\.org$"))
+    (sc/org-font-setup))
 
   (use-package org-contrib
     :ensure t
@@ -105,6 +158,7 @@
 
   (org-babel-do-load-languages
    'org-babel-load-languages '((C . t)
+                               (shell . t)
                                (js . t)
                                (ruby . t)
                                (python .t)
@@ -135,14 +189,10 @@
     :config
     (require 'evil-org-agenda)
     (evil-org-agenda-set-keys))
-
-  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+#+end_src
+** Keybinds
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c a") 'org-agenda)
 #+end_src
 
 * Completion
@@ -177,7 +227,7 @@ Minibuffer completion powered by [[https://github.com/abo-abo/swiper#ivy][Ivy]] 
     :config
     ;; Remove commands that only work with key bindings
     (put 'counsel-find-symbol 'no-counsel-M-x t)
-    :bind (("M-X" . counsel-M-x)
+    :bind (("M-x" . counsel-M-x)
            ("C-x C-f" . counsel-find-file)
            ("C-x d" . counsel-dired)
            ("C-h v" . counsel-describe-variable)
@@ -191,6 +241,14 @@ Buffer associated keymaps
   (global-set-key (kbd "C-x b") 'ibuffer)
 #+end_src
 
+* YASnippet
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :config
+    (setq yas-snippet-dirs '("~/.dotfiles/emacs/.emacs.d/snippets"))
+    (yas-global-mode 1))
+#+end_src
 * LSP
 #+begin_src emacs-lisp
   (setq lsp-use-plists t)
@@ -205,12 +263,10 @@ Buffer associated keymaps
   (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
   (use-package company
-    :after lsp-mode
-    :hook (lsp-mode . company-mode)
+    :ensure t
+    :init (company-mode)
     :bind (:map company-active-map
            ("<tab>" . company-complete-selection))
-          (:map lsp-mode-map
-           ("<tab>" . company-indent-or-complete-common))
     :custom
     (company-minimum-prefix-length 1)
     (company-idle-delay 0.0))
@@ -325,9 +381,11 @@ Projectile, treemacs and, magit
 #+end_src
 
 ** Python
-
 ** Go
-
+#+begin_src emacs-lisp
+  (use-package go-mode
+    :ensure t)
+#+end_src
 ** Haskell
 
 * Startup time
